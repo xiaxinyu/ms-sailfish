@@ -1,4 +1,4 @@
-package com.summer.project.oauth2.core;
+package com.sailfish.authorization.core;
 
 import javax.sql.DataSource;
 

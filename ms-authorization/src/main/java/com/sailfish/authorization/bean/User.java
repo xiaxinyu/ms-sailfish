@@ -1,4 +1,4 @@
-package com.summer.project.oauth2.bean;
+package com.sailfish.authorization.bean;
 
 import java.io.Serializable;
 

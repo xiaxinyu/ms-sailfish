@@ -1,4 +1,4 @@
-package com.summer.project.oauth2.core;
+package com.sailfish.authorization.core;
 
 import javax.sql.DataSource;
 
@@ -21,8 +21,8 @@ import org.springframework.security.oauth2.provider.request.DefaultOAuth2Request
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 
-import com.summer.project.oauth2.core.contant.AuthConstant;
-import com.summer.project.oauth2.service.UserService;
+import com.sailfish.authorization.core.contant.AuthConstant;
+import com.sailfish.authorization.service.UserService;
 
 @Configuration
 @EnableWebSecurity

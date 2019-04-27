@@ -1,4 +1,6 @@
 spring:
+  application:
+    name: authorization
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     url: jdbc:mysql://127.0.0.1:3306/oauth2?useUnicode=true&characterEncoding=utf-8&useSSL=false
@@ -16,7 +18,7 @@ spring:
       enabled: true
 
 server:
-  port: 9090
+  port: 8762
   tomcat:
     uri-encoding: UTF-8
     maxHttpPostSize: 4194304
@@ -30,6 +32,7 @@ server:
 mybatis:
   mapper-locations: classpath:mapper/*.xml
 
-logger:
-  level:
-    root: debug
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.1.1:8761/eureka/ 

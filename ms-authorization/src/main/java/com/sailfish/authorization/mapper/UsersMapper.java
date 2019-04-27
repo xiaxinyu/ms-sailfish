@@ -1,8 +1,8 @@
-package com.summer.project.oauth2.mapper;
+package com.sailfish.authorization.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.summer.project.oauth2.bean.User;
+import com.sailfish.authorization.bean.User;
 
 @Mapper
 public interface UsersMapper {

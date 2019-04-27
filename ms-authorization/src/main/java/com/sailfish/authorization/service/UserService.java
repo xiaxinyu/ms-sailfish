@@ -1,4 +1,4 @@
-package com.summer.project.oauth2.service;
+package com.sailfish.authorization.service;
 
 import org.springframework.security.core.userdetails.UserDetailsService;
 

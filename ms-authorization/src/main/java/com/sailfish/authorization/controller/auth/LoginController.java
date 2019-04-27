@@ -1,4 +1,4 @@
-package com.summer.project.oauth2.controller.auth;
+package com.sailfish.authorization.controller.auth;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

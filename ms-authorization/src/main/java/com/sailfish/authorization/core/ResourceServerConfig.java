@@ -1,4 +1,4 @@
-package com.summer.project.oauth2.core;
+package com.sailfish.authorization.core;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;

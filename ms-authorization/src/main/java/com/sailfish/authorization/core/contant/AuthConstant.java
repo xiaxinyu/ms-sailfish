@@ -1,4 +1,4 @@
-package com.summer.project.oauth2.core.contant;
+package com.sailfish.authorization.core.contant;
 
 public class AuthConstant {
 	public static final String LOGIN_PAGE = "/authentication/require";

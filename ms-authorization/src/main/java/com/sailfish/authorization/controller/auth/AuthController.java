@@ -1,4 +1,4 @@
-package com.summer.project.oauth2.controller.auth;
+package com.sailfish.authorization.controller.auth;
 
 import java.util.Map;
 
