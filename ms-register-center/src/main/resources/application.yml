@@ -15,6 +15,3 @@ eureka:
 spring:
   application:
     name: eurka-server
-    
-logging:
-  config: classpath:logback.xml
