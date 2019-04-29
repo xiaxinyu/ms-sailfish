@@ -1,0 +1,20 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:8761/eureka/
+      
+server:
+  port: 8768
+  
+spring:
+  application:
+    name: gateway
+    
+zuul:
+  routes:
+    zuul-ribbon:
+      path: /zuul-hystrix-ribbon/**
+      serviceId: Hystrix-Ribbon
+    zuul-feign:
+      path: /zuul-hystrix-feign/**
+      serviceId: Hystrix-Feign
