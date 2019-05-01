@@ -4,14 +4,16 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cloud.netflix.zuul.filters.support.FilterConstants;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 
 @Component
-public class SecurityZuulFilter extends ZuulFilter {
-	private Logger logger = LoggerFactory.getLogger(SecurityZuulFilter.class);
+public class AuthFilter extends ZuulFilter {
+	private Logger logger = LoggerFactory.getLogger(AuthFilter.class);
 
 	/**
 	 * filterType：返回一个字符串代表过滤器的类型，在zuul中定义了四种不同生命周期的过滤器类型，具体如下： pre：路由之前
@@ -19,7 +21,7 @@ public class SecurityZuulFilter extends ZuulFilter {
 	 */
 	@Override
 	public String filterType() {
-		return "pre";
+		return FilterConstants.PRE_TYPE;
 	}
 
 	/**
@@ -52,7 +54,7 @@ public class SecurityZuulFilter extends ZuulFilter {
 		if (accessToken == null) {
 			logger.warn("Token is empty");
 			ctx.setSendZuulResponse(false);
-			ctx.setResponseStatusCode(401);
+			ctx.setResponseStatusCode(HttpStatus.UNAUTHORIZED.value());
 			try {
 				ctx.getResponse().getWriter().write("Token is empty");
 			} catch (Exception e) {
