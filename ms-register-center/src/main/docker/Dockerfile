@@ -1,8 +1,8 @@
 # dockerfile 基础配置,  build comand: mvn install dockerfile:build
 FROM java:latest
 VOLUME /tmp
-ARG JAR_FILE
-COPY ${JAR_FILE} /app/app.jar
-WORKDIR /app/
+ADD ms-register-center.jar app.jar
+RUN sh -c 'touch /app.jar'
 EXPOSE 8761
-ENTRYPOINT ["java","-jar","./app.jar"]
+ENV JAVA_OPTS=""
+ENTRYPOINT [ "sh", "-c", "java $JAVA_OPTS  -jar /app.jar" ]
