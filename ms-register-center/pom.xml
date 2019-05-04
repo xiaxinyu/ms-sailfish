@@ -45,7 +45,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-					<mainClass>com.kpatch.KpatchApplication</mainClass>
+					<mainClass>com.sailfish.register.center.ApplicaitonEureka</mainClass>
 				</configuration>
 				<executions>
 					<execution>
