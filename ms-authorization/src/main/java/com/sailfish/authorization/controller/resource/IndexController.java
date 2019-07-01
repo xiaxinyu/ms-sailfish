@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class IndexController {
-
 	@GetMapping("/api/sayHello")
 	private String sayHello() {
 		return "Hello World";
