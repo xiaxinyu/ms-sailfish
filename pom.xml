@@ -19,6 +19,7 @@
         <spring-boot-version>2.0.6.RELEASE</spring-boot-version>
         <spring-cloud-version>Finchley.RELEASE</spring-cloud-version>
         <commons-codec-version>1.10</commons-codec-version>
+        <lombok-version>1.18.8</lombok-version>
     </properties>
 
     <dependencyManagement>
@@ -43,6 +44,13 @@
                 <groupId>commons-codec</groupId>
                 <artifactId>commons-codec</artifactId>
                 <version>${commons-codec-version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok-version}</version>
+                <scope>provided</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
