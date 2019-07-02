@@ -1,9 +1,13 @@
-CREATE TABLE `users` (
-  `username` varchar(50) NOT NULL,
-  `password` varchar(100) NOT NULL,
-  `enabled` tinyint(1) NOT NULL,
-  PRIMARY KEY (`username`)
-);
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(100) DEFAULT NULL,
+  `password` varchar(100) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `active_code` varchar(100) DEFAULT NULL,
+  `active_status` int(11) DEFAULT '0',
+  `roles` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `authorities` (
   `username` varchar(50) NOT NULL,
