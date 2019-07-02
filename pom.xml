@@ -10,6 +10,7 @@
     <modules>
         <module>ms-register-center</module>
         <module>ms-authorization</module>
+        <module>ms-gateway</module>
         <module>ms-utils</module>
     </modules>
 
@@ -17,6 +18,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring-boot-version>2.0.6.RELEASE</spring-boot-version>
         <spring-cloud-version>Finchley.RELEASE</spring-cloud-version>
+        <commons-codec-version>1.10</commons-codec-version>
     </properties>
 
     <dependencyManagement>
@@ -36,6 +38,12 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
+            <dependency>
+                <groupId>commons-codec</groupId>
+                <artifactId>commons-codec</artifactId>
+                <version>${commons-codec-version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -54,10 +62,6 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring-boot-version}</version>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                </configuration>
             </plugin>
         </plugins>
     </build>
