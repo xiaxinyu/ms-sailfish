@@ -1,4 +1,4 @@
-package com.sailfish.test;
+package com.sailfish.string;
 
 import com.sailfish.utils.GitUtils;
 import org.eclipse.jgit.api.Git;

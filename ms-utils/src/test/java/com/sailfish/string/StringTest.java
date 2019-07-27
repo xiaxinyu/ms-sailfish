@@ -1,4 +1,4 @@
-package com.sailfish.test;
+package com.sailfish.string;
 
 import org.junit.Assert;
 import org.junit.Test;
