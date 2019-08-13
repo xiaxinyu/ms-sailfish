@@ -7,10 +7,10 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class LoginController {
 
-	@RequestMapping("/oauth/index")
+	@RequestMapping("/oauth/login")
 	public ModelAndView loginPage() {
 		ModelAndView view = new ModelAndView();
-		view.setViewName("oauth/index");
+		view.setViewName("oauth/login");
 		view.addObject("loginProcessUrl", "/oauth/authorize");
 		return view;
 	}
