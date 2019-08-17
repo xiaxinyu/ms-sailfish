@@ -6,12 +6,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class LoginController {
-
-	@RequestMapping("/oauth/login")
-	public ModelAndView loginPage() {
-		ModelAndView view = new ModelAndView();
-		view.setViewName("oauth/login");
-		view.addObject("loginProcessUrl", "/oauth/authorize");
-		return view;
-	}
+    /*@RequestMapping("/login")
+    public ModelAndView loginPage() {
+        ModelAndView view = new ModelAndView();
+        view.setViewName("login");
+        view.addObject("loginProcessUrl", "/oauth/authorize");
+        return view;
+    }*/
 }
