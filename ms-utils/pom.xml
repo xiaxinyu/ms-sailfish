@@ -12,7 +12,8 @@
     <artifactId>ms-utils</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>ms-utils</name>
-    <url>http://maven.apache.org</url>
+    <packaging>jar</packaging>
+    
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring-verison>5.1.9.RELEASE</spring-verison>
@@ -106,7 +107,16 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.8</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
         </dependency>
     </dependencies>
 </project>

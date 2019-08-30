@@ -7,6 +7,7 @@ import java.util.List;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sailfish.domain.ResponseEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,17 +17,19 @@ import org.slf4j.LoggerFactory;
  * @author XIAXINYU3
  * @date 2019.7.2
  */
-public class JsonUtils {
-    private static final Logger logger = LoggerFactory.getLogger(JsonUtils.class);
+public class JSONUtils {
+    private static final Logger logger = LoggerFactory.getLogger(JSONUtils.class);
     private static final String EMPTY_JSON = "{}";
     private static final ObjectMapper mapper = new ObjectMapper();
+    private static final Integer SUCCESS_CODE = 20000;
+    private static final Integer FAIL_CODE = 30000;
 
     static {
         mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
         mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
     }
 
-    private JsonUtils() {
+    private JSONUtils() {
     }
 
     public static String format(Object pojo) {
@@ -63,5 +66,13 @@ public class JsonUtils {
 
     public static boolean isEmptyJson(String json) {
         return EMPTY_JSON.equals(json);
+    }
+
+    public static <T> ResponseEntity<T> getSuccess(T data) {
+        return new ResponseEntity(data);
+    }
+
+    public static ResponseEntity getFail(String message) {
+        return ResponseEntity.error(message);
     }
 }

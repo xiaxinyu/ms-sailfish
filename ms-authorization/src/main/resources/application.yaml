@@ -27,7 +27,7 @@ server:
   maxHttpPostSize: 4194304
   session:
     cookie:
-      name: DEVOPSPLATSESSIONID
+      name: AuthorizationSessionId
       
 mybatis:
   mapper-locations: classpath:mapper/*.xml

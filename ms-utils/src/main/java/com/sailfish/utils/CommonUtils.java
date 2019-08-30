@@ -1,18 +1,5 @@
 package com.sailfish.utils;
 
-import java.net.HttpURLConnection;
-import java.net.Inet4Address;
-import java.net.InetAddress;
-import java.net.NetworkInterface;
-import java.net.SocketException;
-import java.net.URL;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Enumeration;
-import java.util.Random;
-
-
-import org.apache.commons.lang3.StringUtils;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +11,7 @@ import org.slf4j.LoggerFactory;
  * @date 2019.7.2
  */
 public class CommonUtils {
-    private static final Logger logger = LoggerFactory.getLogger(JsonUtils.class);
+    private static final Logger logger = LoggerFactory.getLogger(JSONUtils.class);
 
     private CommonUtils() {
     }

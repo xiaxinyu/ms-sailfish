@@ -12,6 +12,7 @@
         <module>ms-authorization</module>
         <module>ms-gateway</module>
         <module>ms-utils</module>
+        <module>ms-websocket</module>
     </modules>
 
     <properties>
@@ -20,6 +21,7 @@
         <spring-cloud-version>Finchley.RELEASE</spring-cloud-version>
         <commons-codec-version>1.10</commons-codec-version>
         <lombok-version>1.18.8</lombok-version>
+        <swagger-version>2.6.1</swagger-version>
     </properties>
 
     <dependencyManagement>
@@ -41,6 +43,12 @@
             </dependency>
 
             <dependency>
+                <groupId>ms-sailfish</groupId>
+                <artifactId>ms-utils</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
                 <groupId>commons-codec</groupId>
                 <artifactId>commons-codec</artifactId>
                 <version>${commons-codec-version}</version>
@@ -51,6 +59,18 @@
                 <artifactId>lombok</artifactId>
                 <version>${lombok-version}</version>
                 <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>${swagger-version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger-ui</artifactId>
+                <version>${swagger-version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
