@@ -63,8 +63,10 @@ public class WebSocketServer {
      */
     @OnClose
     public void onClose() {
-        webSocketSet.remove(this);  //从set中删除
-        subOnlineCount();           //在线数减1
+        //从set中删除
+        webSocketSet.remove(this);
+        //在线数减1
+        subOnlineCount();
         log.info("有一连接关闭！当前在线人数为" + getOnlineCount());
     }
 
