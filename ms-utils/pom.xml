@@ -13,7 +13,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>ms-utils</name>
     <packaging>jar</packaging>
-    
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring-verison>5.1.9.RELEASE</spring-verison>
@@ -122,6 +122,12 @@
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>28.1-jre</version>
         </dependency>
     </dependencies>
 </project>
