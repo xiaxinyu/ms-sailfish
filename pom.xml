@@ -13,6 +13,7 @@
         <module>ms-gateway</module>
         <module>ms-utils</module>
         <module>ms-websocket</module>
+        <module>ms-statemachine</module>
     </modules>
 
     <properties>
