@@ -1,20 +1,95 @@
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://127.0.0.1:8761/eureka/
-      
 server:
   port: 8768
-  
+
 spring:
   application:
-    name: gateway
-    
-zuul:
-  routes:
-    zuul-ribbon:
-      path: /zuul-hystrix-ribbon/**
-      serviceId: Hystrix-Ribbon
-    zuul-feign:
-      path: /zuul-hystrix-feign/**
-      serviceId: Hystrix-Feign
+    name: ms-gateway
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
+  cloud:
+    gateway:
+      routes:
+        - id:  iam
+          uri: lb://iam-service
+          predicates:
+            - Path=/iam/**
+          filters:
+            - StripPrefix=1
+        - id:  oauth
+          uri: lb://oauth-server
+          predicates:
+            - Path=/oauth/**
+          filters:
+            - StripPrefix=1
+        - id:  notify
+          uri: lb://notify-service
+          predicates:
+            - Path=/notify/**
+          filters:
+            - StripPrefix=1
+        - id:  asgard
+          uri: lb://asgard-service
+          predicates:
+            - Path=/asgard/**
+          filters:
+            - StripPrefix=1
+        - id:  manager
+          uri: lb://manager-service
+          predicates:
+            - Path=/manager/**
+          filters:
+            - StripPrefix=1
+        - id:  file
+          uri: lb://file-service
+          predicates:
+            - Path=/file/**
+          filters:
+            - StripPrefix=1
+        - id:  org
+          uri: lb://organization-service
+          predicates:
+            - Path=/org/**
+          filters:
+            - StripPrefix=1
+        - id:  wiki
+          uri: lb://wiki-service
+          predicates:
+            - Path=/wiki/**
+          filters:
+            - StripPrefix=1
+        - id:  demo
+          uri: http://www.baidu.com
+          predicates:
+            - Path=/demo/**
+          filters:
+            - StripPrefix=1
+eureka:
+  instance:
+    preferIpAddress: true
+    leaseRenewalIntervalInSeconds: 10
+    leaseExpirationDurationInSeconds: 30
+    metadata-map:
+      VERSION: v1
+  client:
+    serviceUrl:
+      defaultZone: http://10.54.25.187:8761/eureka/
+    registryFetchIntervalSeconds: 10
+    disable-delta: true
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 80000
+
+ribbon:
+  ReadTimeout: 20000
+  ConnectTimeout: 20000
+  httpclient:
+    enabled: false
+  okhttp:
+    enabled: true
