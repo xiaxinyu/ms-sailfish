@@ -1,5 +1,6 @@
 package com.sailfish.gateway.filter;
 
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
@@ -17,12 +18,8 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component
+@Slf4j
 public class RootFilter implements GlobalFilter, Ordered {
-
-    private static final Logger logger = LoggerFactory.getLogger(RootFilter.class);
-
-    private static final String CONFIG_ENDPOINT = "/choerodon/config";
-
     private static final String ACCESS_TOKEN_PREFIX = "bearer";
 
     private static final String ACCESS_TOKEN_PARAM = "access_token";
@@ -44,16 +41,13 @@ public class RootFilter implements GlobalFilter, Ordered {
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         ServerHttpRequest req = exchange.getRequest();
 
-        if (CONFIG_ENDPOINT.equals(req.getURI().getPath())) {
-            return chain.filter(exchange);
-        }
-
+        String url = req.getURI() + req.getPath().contextPath().value();
+        log.info("请求URL： url={}", url);
         for (CustomGatewayFilterV2 t : customGatewayFilters) {
             if (t.shouldFilter(exchange) && !t.run(exchange)) {
                 break;
             }
         }
-
         return chain.filter(exchange);
     }
 

@@ -1,0 +1,25 @@
+server:
+  port: 8767
+#  servlet:
+#    context-path: /manager
+
+spring:
+  application:
+    name: ms-manager
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
+
+eureka:
+  instance:
+    preferIpAddress: true
+    leaseRenewalIntervalInSeconds: 10
+    leaseExpirationDurationInSeconds: 30
+    metadata-map:
+      VERSION: v1
+  client:
+    serviceUrl:
+      defaultZone: http://10.54.25.187:8761/eureka/
+    registryFetchIntervalSeconds: 10
+    disable-delta: true

@@ -36,7 +36,7 @@ spring:
           filters:
             - StripPrefix=1
         - id:  manager
-          uri: lb://manager-service
+          uri: lb://ms-manager
           predicates:
             - Path=/manager/**
           filters:

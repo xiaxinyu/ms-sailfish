@@ -1,6 +1,7 @@
 package com.sailfish.gateway.filter;
 
 import com.sailfish.gateway.constant.RequestConstants;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.server.reactive.ServerHttpRequest;
@@ -9,6 +10,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.server.ServerWebExchange;
 
 @Component
+@Slf4j
 public class JwtFilter implements CustomGatewayFilterV2 {
 
     private static final Logger logger = LoggerFactory.getLogger(JwtFilter.class);
