@@ -10,6 +10,9 @@ spring:
       max-request-size: 50MB
   cloud:
     gateway:
+      discovery:
+        locator:
+          enabled: true
       routes:
         - id:  iam
           uri: lb://iam-service
