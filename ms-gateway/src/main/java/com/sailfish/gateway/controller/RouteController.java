@@ -4,6 +4,7 @@ import com.sailfish.gateway.domain.dto.GatewayFilterDefinition;
 import com.sailfish.gateway.domain.dto.GatewayPredicateDefinition;
 import com.sailfish.gateway.domain.dto.GatewayRouteDefinition;
 import com.sailfish.gateway.service.DynamicRouteServiceImpl;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.filter.FilterDefinition;
 import org.springframework.cloud.gateway.handler.predicate.PredicateDefinition;
@@ -19,6 +20,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/route")
+@Slf4j
 public class RouteController {
     @Autowired
     private DynamicRouteServiceImpl dynamicRouteService;
@@ -29,6 +31,7 @@ public class RouteController {
         String flag = "fail";
         try {
             RouteDefinition definition = assembleRouteDefinition(gwdefinition);
+            log.info("Add route: {}", definition);
             flag = this.dynamicRouteService.add(definition);
         } catch (Exception e) {
             e.printStackTrace();

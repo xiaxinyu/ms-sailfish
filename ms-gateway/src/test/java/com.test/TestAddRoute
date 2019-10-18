@@ -1,0 +1,21 @@
+{
+    "id": "test",
+    "order": 0,
+    "uri": "http://www.baidu.com",
+    "predicates": [
+        {
+            "name": "Path",
+            "args": {
+                "_genkey_0": "/test/**"
+            }
+        }
+    ],
+    "filters": [
+        {
+            "name": "StripPrefix",
+            "args": {
+                "_genkey_0": "1"
+            }
+        }
+    ]
+}
