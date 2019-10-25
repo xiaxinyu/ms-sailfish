@@ -21,6 +21,6 @@ public class RequestConstants {
 
     public static final String HEADER_TOKEN = "Authorization";
 
-    //是否需要执行过滤器
+    // 是否需要执行过滤器
     public static final String SHOULD_FILTER = "should_filter";
 }
