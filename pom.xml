@@ -15,6 +15,7 @@
 		<module>ms-websocket</module>
 		<module>ms-statemachine</module>
 		<module>ms-manager</module>
+		<module>ms-reactive</module>
 	</modules>
 
 	<properties>
