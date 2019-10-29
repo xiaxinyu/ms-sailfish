@@ -13,61 +13,7 @@ spring:
       discovery:
         locator:
           enabled: true
-      routes:
-        - id:  iam
-          uri: lb://iam-service
-          predicates:
-            - Path=/iam/**
-          filters:
-            - StripPrefix=1
-        - id:  oauth
-          uri: lb://oauth-server
-          predicates:
-            - Path=/oauth/**
-          filters:
-            - StripPrefix=1
-        - id:  notify
-          uri: lb://notify-service
-          predicates:
-            - Path=/notify/**
-          filters:
-            - StripPrefix=1
-        - id:  asgard
-          uri: lb://asgard-service
-          predicates:
-            - Path=/asgard/**
-          filters:
-            - StripPrefix=1
-        - id:  manager
-          uri: lb://ms-manager
-          predicates:
-            - Path=/manager/**
-          filters:
-            - StripPrefix=1
-        - id:  file
-          uri: lb://file-service
-          predicates:
-            - Path=/file/**
-          filters:
-            - StripPrefix=1
-        - id:  org
-          uri: lb://organization-service
-          predicates:
-            - Path=/org/**
-          filters:
-            - StripPrefix=1
-        - id:  wiki
-          uri: lb://wiki-service
-          predicates:
-            - Path=/wiki/**
-          filters:
-            - StripPrefix=1
-        - id:  demo
-          uri: http://www.baidu.com
-          predicates:
-            - Path=/demo/**
-          filters:
-            - StripPrefix=1
+
 eureka:
   instance:
     preferIpAddress: true
@@ -77,7 +23,7 @@ eureka:
       VERSION: v1
   client:
     serviceUrl:
-      defaultZone: http://10.54.25.187:8761/eureka/
+      defaultZone: http://localhost:8761/eureka/
     registryFetchIntervalSeconds: 10
     disable-delta: true
 
@@ -96,3 +42,7 @@ ribbon:
     enabled: false
   okhttp:
     enabled: true
+
+logging:
+  level:
+    com.sailfish: debug

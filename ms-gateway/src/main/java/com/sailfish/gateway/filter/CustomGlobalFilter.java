@@ -9,7 +9,7 @@ import com.sailfish.gateway.domain.RequestContext;
  * @author XIAXINYU3
  * @date 2019.10.25
  */
-public interface CustomGatewayFilter {
+public interface CustomGlobalFilter {
     /**
      * filter顺序，越小越先执行
      *

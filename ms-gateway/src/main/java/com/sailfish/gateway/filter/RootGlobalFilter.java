@@ -25,27 +25,21 @@ import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.stream.Collectors;
 
-/**
- * @program: steam-gateway
- * @description: 网关检验filter
- * @author: dushaohua5
- * @create: 2019-09-05 22:17
- */
 @Component
 @Slf4j
-public class RootFilter implements GlobalFilter, Ordered {
+public class RootGlobalFilter implements GlobalFilter, Ordered {
     private static final String ACCESS_TOKEN_PREFIX = "bearer";
     private static final String ACCESS_TOKEN_PARAM = "access_token";
-    private List<CustomGatewayFilter> customGatewayFilters;
+    private List<CustomGlobalFilter> customGatewayFilters;
 
-    public RootFilter(Optional<List<CustomGatewayFilter>> optionalHelperFilters) {
+    public RootGlobalFilter(Optional<List<CustomGlobalFilter>> optionalHelperFilters) {
         customGatewayFilters = optionalHelperFilters.orElseGet(Collections::emptyList)
                 .stream()
-                .sorted(Comparator.comparing(CustomGatewayFilter::filterOrder))
+                .sorted(Comparator.comparing(CustomGlobalFilter::filterOrder))
                 .collect(Collectors.toList());
     }
 
-    public void setCustomGatewayFilters(List<CustomGatewayFilter> customGatewayFilters) {
+    public void setCustomGatewayFilters(List<CustomGlobalFilter> customGatewayFilters) {
         this.customGatewayFilters = customGatewayFilters;
     }
 
@@ -61,7 +55,7 @@ public class RootFilter implements GlobalFilter, Ordered {
                 uri, request.getMethod().name().toLowerCase()), new CheckResponse(CheckStatus.SUCCESS_PASS_SITE));
         CheckResponse checkResponse = requestContext.getCheckResponse();
         try {
-            for (CustomGatewayFilter t : customGatewayFilters) {
+            for (CustomGlobalFilter t : customGatewayFilters) {
                 if (t.shouldFilter(requestContext) && !t.run(requestContext)) {
                     break;
                 }
