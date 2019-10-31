@@ -9,6 +9,7 @@ import com.sailfish.gateway.domain.RequestVariableHolder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
+import org.springframework.cloud.gateway.route.Route;
 import org.springframework.core.Ordered;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.http.HttpHeaders;
@@ -51,7 +52,7 @@ public class RootGlobalFilter implements GlobalFilter, Ordered {
         log.info("请求地址：{}", uri);
 
         //循环校验
-        RequestContext requestContext = new RequestContext(new CheckRequest(parseAndGetToken(request),
+        RequestContext requestContext = new RequestContext(parseAndGetRoute(exchange), new CheckRequest(parseAndGetToken(request),
                 uri, request.getMethod().name().toLowerCase()), new CheckResponse(CheckStatus.SUCCESS_PASS_SITE));
         CheckResponse checkResponse = requestContext.getCheckResponse();
         try {
@@ -128,5 +129,13 @@ public class RootGlobalFilter implements GlobalFilter, Ordered {
             }
         }
         return token;
+    }
+
+    private Route parseAndGetRoute(ServerWebExchange exchange) {
+        Object attribute = exchange.getAttribute("org.springframework.cloud.gateway.support.ServerWebExchangeUtils.gatewayRoute");
+        if (Objects.nonNull(attribute) && attribute instanceof Route) {
+            return (Route) attribute;
+        }
+        return null;
     }
 }
