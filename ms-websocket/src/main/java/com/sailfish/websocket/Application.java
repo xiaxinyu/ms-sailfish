@@ -3,6 +3,7 @@ package com.sailfish.websocket;
 import com.sailfish.websocket.listener.StartUpListener;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
 /**
  * Application Entry
@@ -11,6 +12,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @date 2019.8.30
  */
 @SpringBootApplication
+@EnableEurekaClient
 public class Application {
     public static void main(String[] args) {
         SpringApplication springApplication = new SpringApplication(Application.class);

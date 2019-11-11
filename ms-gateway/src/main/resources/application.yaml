@@ -13,6 +13,19 @@ spring:
       discovery:
         locator:
           enabled: true
+      routes:
+        - id:  websocket
+          uri: lb:ws://ms-websocket
+          predicates:
+            - Path=/wsocket/**
+          filters:
+              - StripPrefix=1
+        - id: demo
+          uri: http://www.baidu.com
+          predicates:
+            - Path=/demo/**
+          filters:
+            - StripPrefix=1
 
 eureka:
   instance:

@@ -1,6 +1,6 @@
 spring:
   application:
-    name: WebSocket
+    name: ms-websocket
   thymeleaf:
     prefix: classpath:/views/
     suffix: .html
