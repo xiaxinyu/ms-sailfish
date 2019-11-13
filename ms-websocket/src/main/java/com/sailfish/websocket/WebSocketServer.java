@@ -1,19 +1,13 @@
 package com.sailfish.websocket;
 
-import java.io.IOException;
-import java.util.concurrent.CopyOnWriteArraySet;
-
-import javax.websocket.OnClose;
-import javax.websocket.OnError;
-import javax.websocket.OnMessage;
-import javax.websocket.OnOpen;
-import javax.websocket.Session;
-import javax.websocket.server.PathParam;
-import javax.websocket.server.ServerEndpoint;
-
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-import lombok.extern.slf4j.Slf4j;
+import javax.websocket.*;
+import javax.websocket.server.PathParam;
+import javax.websocket.server.ServerEndpoint;
+import java.io.IOException;
+import java.util.concurrent.CopyOnWriteArraySet;
 
 
 /**
@@ -52,9 +46,13 @@ public class WebSocketServer {
         log.info("有新窗口开始监听:" + sid + ",当前在线人数为" + getOnlineCount());
         this.sid = sid;
         try {
-            sendMessage("连接成功");
+            if (!session.isOpen()) {
+                log.warn("s.session为空----------------");
+            } else {
+                sendMessage("连接成功");
+            }
         } catch (IOException e) {
-            log.error("websocket IO异常");
+            log.error("websocket IO异常", e);
         }
     }
 
@@ -102,6 +100,7 @@ public class WebSocketServer {
      * 实现服务器主动推送
      */
     public void sendMessage(String message) throws IOException {
+        log.info("session.getBasicRemote()=={}", this.session.getBasicRemote());
         this.session.getBasicRemote().sendText(message);
     }
 

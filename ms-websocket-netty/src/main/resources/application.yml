@@ -1,0 +1,20 @@
+server:
+  port: 9001
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+
+netty-websocket:
+  host: 0.0.0.0 #WebSocket的host,"0.0.0.0"即是所有本地地址
+  port: 9002 #WebSocket绑定端口号,默认值80,如果设置为0则使用随机端口
+  path: /websocket #路由,默认值'/'
+  boss-loop-group-threads: 2 #客户端线程,默认值0
+  worker-loop-group-threads: 8 #工作线程,默认值0
+  use-compression-handler: true #是否压缩数据,默认值false
+  option.so-backlog: 500 #允许进入执行队列客户端数量,默认值128
+  reader-idle-time-seconds: 50 #写空闲时间,注意大于客户端总心跳间隔 5*10
+  writer-idle-time-seconds: 0 #读空闲时间,
+  all-idle-time-seconds:  0 #读写空闲总时间,注意大于客户端总心跳间隔
+  max-frame-payload-length: 65536 #最大允许帧载荷长度

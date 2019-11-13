@@ -13,9 +13,9 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
  */
 @SpringBootApplication
 @EnableEurekaClient
-public class Application {
+public class ApplicationWebSocket {
     public static void main(String[] args) {
-        SpringApplication springApplication = new SpringApplication(Application.class);
+        SpringApplication springApplication = new SpringApplication(ApplicationWebSocket.class);
         springApplication.addListeners(new StartUpListener());
         springApplication.run(args);
     }

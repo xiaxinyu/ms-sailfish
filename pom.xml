@@ -16,7 +16,8 @@
 		<module>ms-statemachine</module>
 		<module>ms-manager</module>
 		<module>ms-reactive</module>
-	</modules>
+        <module>ms-websocket-netty</module>
+    </modules>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

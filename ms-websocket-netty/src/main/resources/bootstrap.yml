@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: ms-websocket-netty
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh

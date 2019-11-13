@@ -12,13 +12,4 @@ spring:
       enabled: true
 
 server:
-  port: 9001
-  tomcat:
-    uri-encoding: UTF-8
-    maxHttpPostSize: 4194304
-    maxHttpHeaderSize: 65536
-  maxHttpHeaderSize: 65536
-  maxHttpPostSize: 4194304
-  session:
-    cookie:
-      name: AuthorizationSessionId
+  port: 9005

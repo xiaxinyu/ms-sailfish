@@ -14,16 +14,22 @@ spring:
         locator:
           enabled: true
       routes:
-        - id:  websocket
+        - id:  tomcat-websocket
           uri: lb:ws://ms-websocket
           predicates:
-            - Path=/wsocket/**
+            - Path=/tomcat/websocket/**
           filters:
-              - StripPrefix=1
+            - StripPrefix=1
         - id: demo
           uri: http://www.baidu.com
           predicates:
             - Path=/demo/**
+          filters:
+            - StripPrefix=1
+        - id: netty-websocket
+          uri: ws://127.0.0.1:9002
+          predicates:
+            - Path=/netty/websocket/**
           filters:
             - StripPrefix=1
 
