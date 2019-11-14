@@ -2,6 +2,9 @@ package com.sailfish.websocket.netty;
 
 import io.netty.handler.codec.http.HttpHeaders;
 import io.netty.handler.timeout.IdleStateEvent;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.yeauty.annotation.*;
 import org.yeauty.pojo.ParameterMap;
@@ -11,10 +14,14 @@ import java.io.IOException;
 
 @ServerEndpoint(prefix = "netty-websocket")
 @Component
+@Slf4j
+@Setter
+@Getter
 public class MyWebSocket {
+
     @OnOpen
     public void onOpen(Session session, HttpHeaders headers, ParameterMap parameterMap) throws IOException {
-        System.out.println("new connection");
+        log.info("New Connection, sessionId={}, this_hash={}", session.id().asLongText(), this.toString());
 
         String paramValue = parameterMap.getParameter("paramKey");
         System.out.println(paramValue);
@@ -32,7 +39,7 @@ public class MyWebSocket {
 
     @OnMessage
     public void onMessage(Session session, String message) {
-        System.out.println(message);
+        log.info("this_hash={}, {}", this.toString(), message);
         session.sendText("Hello Netty!");
     }
 
