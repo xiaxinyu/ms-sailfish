@@ -16,6 +16,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
+import org.springframework.stereotype.Component;
 import org.springframework.util.MultiValueMap;
 import org.springframework.util.StringUtils;
 import org.springframework.web.server.ServerWebExchange;
@@ -25,7 +26,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.stream.Collectors;
 
-//@Component
+@Component
 @Slf4j
 public class RootGlobalFilter implements GlobalFilter, Ordered {
     private static final String ACCESS_TOKEN_PREFIX = "bearer";
@@ -71,7 +72,6 @@ public class RootGlobalFilter implements GlobalFilter, Ordered {
         ServerHttpResponse response = exchange.getResponse();
         int checkStatusCode = checkResponse.getCheckStatus().getValue();
         if (CheckStatusValidator.SUCCESS.contains(checkStatusCode)) {
-            response.setStatusCode(HttpStatus.OK);
             log.debug("验证结果 200, context: {}", requestContext);
             validatedFlag = true;
         } else if (CheckStatusValidator.UNAUTHORIZED.contains(checkStatusCode)
