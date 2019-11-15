@@ -11,6 +11,7 @@ import org.yeauty.pojo.ParameterMap;
 import org.yeauty.pojo.Session;
 
 import java.io.IOException;
+import java.util.Map;
 
 @ServerEndpoint(prefix = "netty-websocket")
 @Component
@@ -21,7 +22,9 @@ public class MyWebSocket {
 
     @OnOpen
     public void onOpen(Session session, HttpHeaders headers, ParameterMap parameterMap) throws IOException {
+        Map<String, MyWebSocket> map = SpringUtils.getApplicationContext().getBeansOfType(MyWebSocket.class);
         log.info("New Connection, sessionId={}, this_hash={}", session.id().asLongText(), this.toString());
+        log.info("MyWebSocket map: {}", map);
 
         String paramValue = parameterMap.getParameter("paramKey");
         System.out.println(paramValue);
