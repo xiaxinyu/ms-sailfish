@@ -1,11 +1,24 @@
 server:
   port: 8767
-#  servlet:
-#    context-path: /manager
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
 
 spring:
   application:
     name: ms-manager
+  boot:
+    admin:
+      client:
+        url: http://127.0.0.1:8760
+        username: summer
+        password: 123456
   servlet:
     multipart:
       max-file-size: 50MB
@@ -20,6 +33,6 @@ eureka:
       VERSION: v1
   client:
     serviceUrl:
-      defaultZone: http://10.54.25.187:8761/eureka/
+      defaultZone: http://127.0.0.1:8761/eureka/
     registryFetchIntervalSeconds: 10
     disable-delta: true

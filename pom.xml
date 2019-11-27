@@ -17,7 +17,8 @@
 		<module>ms-manager</module>
 		<module>ms-reactive</module>
         <module>ms-websocket-netty</module>
-    </modules>
+		<module>ms-admin</module>
+	</modules>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
