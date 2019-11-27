@@ -1,21 +1,19 @@
 package com.sailfish.authorization.service.impl;
 
-import org.apache.commons.lang.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.sailfish.authorization.bean.User;
+import com.sailfish.authorization.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
-import com.sailfish.authorization.bean.CustomUserDetails;
-import com.sailfish.authorization.bean.User;
-import com.sailfish.authorization.mapper.UsersMapper;
-import com.sailfish.authorization.service.UserService;
-
+import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * User Service Implements
@@ -25,31 +23,28 @@ import java.util.List;
  */
 @Service
 public class UserServiceImpl implements UserService {
-    private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
+    private List<User> userList;
+
     @Autowired
-    private UsersMapper usersMapper;
+    private PasswordEncoder passwordEncoder;
+
+    @PostConstruct
+    public void initData() {
+        String password = passwordEncoder.encode("123456");
+        userList = new ArrayList<>();
+        userList.add(new User("summer", password, AuthorityUtils.commaSeparatedStringToAuthorityList("admin")));
+        userList.add(new User("spring", password, AuthorityUtils.commaSeparatedStringToAuthorityList("client")));
+        userList.add(new User("winter", password, AuthorityUtils.commaSeparatedStringToAuthorityList("client")));
+        userList.add(new User("autumn", password, AuthorityUtils.commaSeparatedStringToAuthorityList("client")));
+    }
 
     @Override
-    public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-        logger.info("Query user: userName={}", userName);
-        User user = usersMapper.getUser(userName);
-        if (null != user) {
-            throw new UsernameNotFoundException(String.format("Can't find user, userName=%s", userName));
-        }
-
-        //用户权限
-        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
-        if (StringUtils.isNotBlank(user.getRoles())) {
-            logger.info("用户具有权限，userName={}， roles={}", userName, user.getRoles());
-            String[] roles = user.getRoles().split(",");
-            for (String role : roles) {
-                if (StringUtils.isNotBlank(role)) {
-                    authorities.add(new SimpleGrantedAuthority(role.trim()));
-                }
-            }
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        List<User> findUserList = userList.stream().filter(user -> user.getUsername().equals(username)).collect(Collectors.toList());
+        if (!CollectionUtils.isEmpty(findUserList)) {
+            return findUserList.get(0);
         } else {
-            throw new UsernameNotFoundException(String.format("User find roles, userName=%s", userName));
+            throw new UsernameNotFoundException("用户名或密码错误");
         }
-        return new CustomUserDetails(user, authorities);
     }
 }

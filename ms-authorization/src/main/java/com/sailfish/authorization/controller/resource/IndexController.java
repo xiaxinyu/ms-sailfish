@@ -1,13 +1,18 @@
 package com.sailfish.authorization.controller.resource;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class IndexController {
-	@GetMapping("/api/sayHello")
-	public String sayHello() {
-		return "Hello World";
-	}
-
+    @RestController
+    @RequestMapping("/user")
+    public class UserController {
+        @GetMapping("/getCurrentUser")
+        public Object getCurrentUser(Authentication authentication) {
+            return authentication.getPrincipal();
+        }
+    }
 }
