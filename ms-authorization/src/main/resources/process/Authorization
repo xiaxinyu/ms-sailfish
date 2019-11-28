@@ -1,3 +1,4 @@
+授权码模式：
 第一步：获取授权码
 http://localhost:8762/oauth/authorize?response_type=code&client_id=admin&redirect_uri=http://www.baidu.com&scope=all&state=normal
 
@@ -14,3 +15,12 @@ form:
 第三步：
 http://localhost:8762/user/getCurrentUser
 Bearer Token: 497be1e0-1b04-4474-ad7f-c4b96ec6d319
+
+密码模式：
+http://localhost:8762/oauth/token
+Basic Auth： admin/123456
+form:
+    grant_type: password
+    username: summer
+    password: 123456
+    scope: all
