@@ -18,7 +18,8 @@
 		<module>ms-reactive</module>
         <module>ms-websocket-netty</module>
 		<module>ms-admin</module>
-	</modules>
+        <module>ms-service-governance</module>
+    </modules>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
