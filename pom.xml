@@ -28,6 +28,7 @@
 		<commons-codec-version>1.10</commons-codec-version>
 		<lombok-version>1.18.8</lombok-version>
 		<swagger-version>2.6.1</swagger-version>
+		<maven.deploy.version>2.8.2</maven.deploy.version>
 	</properties>
 
 	<dependencyManagement>
