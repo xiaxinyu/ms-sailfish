@@ -97,12 +97,6 @@
         </dependency>
 
         <dependency>
-            <groupId>org.eclipse.jgit</groupId>
-            <artifactId>org.eclipse.jgit</artifactId>
-            <version>5.4.0.201906121030-r</version>
-        </dependency>
-
-        <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
             <version>2.5</version>
@@ -124,10 +118,25 @@
             <artifactId>springfox-swagger-ui</artifactId>
         </dependency>
 
+        <!-- Eclipse Git -->
+        <dependency>
+            <groupId>org.eclipse.jgit</groupId>
+            <artifactId>org.eclipse.jgit</artifactId>
+            <version>5.4.0.201906121030-r</version>
+        </dependency>
+
+        <!-- Guava -->
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>28.1-jre</version>
+        </dependency>
+
+        <!-- OpenJDK jol-->
+        <dependency>
+            <groupId>org.openjdk.jol</groupId>
+            <artifactId>jol-core</artifactId>
+            <version>0.9</version>
         </dependency>
     </dependencies>
 </project>

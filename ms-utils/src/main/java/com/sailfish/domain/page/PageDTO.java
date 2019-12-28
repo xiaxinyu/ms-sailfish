@@ -3,6 +3,8 @@ package com.sailfish.domain.page;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.io.Serializable;
+
 /**
  * 分页DTO
  *
@@ -11,7 +13,7 @@ import lombok.Data;
  */
 @Data
 @AllArgsConstructor
-public class PageDTO {
+public class PageDTO implements Serializable {
     public PageDTO() {
     }
 
