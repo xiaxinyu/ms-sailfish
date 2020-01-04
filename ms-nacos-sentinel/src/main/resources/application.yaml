@@ -6,10 +6,12 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: 127.0.0.1:8848 #配置Nacos地址
+        server-addr: localhost:8848 #配置Nacos地址
     sentinel:
       transport:
-        dashboard: 127.0.0.1:8858 #配置sentinel dashboard地址
+        dashboard: localhost:8080 #配置sentinel dashboard地址
+        client-ip: 10.54.8.11
+        port: 8719
       eager: true
 management:
   endpoints:

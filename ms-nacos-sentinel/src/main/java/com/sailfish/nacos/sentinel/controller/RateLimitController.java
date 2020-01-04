@@ -34,7 +34,7 @@ public class RateLimitController {
     }
 
     public ResponseEntity handleException(BlockException exception) {
-        return ResponseEntity.ok();
+        return ResponseEntity.error("Beyond limit");
     }
 }
 
