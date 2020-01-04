@@ -12,7 +12,8 @@ import org.openjdk.jol.info.ClassLayout;
 @Slf4j
 public class ClassLayoutUtils {
 
-    public static void print(Object object){
+    public static void print(Object object) {
+        log.info("HasCode Hex: {}", Integer.toHexString(object.hashCode()));
         String layout = ClassLayout.parseInstance(object).toPrintable();
         log.info(layout);
     }

@@ -2,11 +2,15 @@ server:
   port: 8206
 spring:
   application:
-    name: nacos-user-service
+    name: nacos-sentinel-test
   cloud:
     nacos:
       discovery:
         server-addr: 127.0.0.1:8848 #配置Nacos地址
+    sentinel:
+      transport:
+        dashboard: 127.0.0.1:8858 #配置sentinel dashboard地址
+      eager: true
 management:
   endpoints:
     web:

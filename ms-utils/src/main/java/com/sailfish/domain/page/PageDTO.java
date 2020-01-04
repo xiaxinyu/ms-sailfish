@@ -2,6 +2,7 @@ package com.sailfish.domain.page;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.ToString;
 
 import java.io.Serializable;
 
@@ -13,6 +14,7 @@ import java.io.Serializable;
  */
 @Data
 @AllArgsConstructor
+@ToString
 public class PageDTO implements Serializable {
     public PageDTO() {
     }

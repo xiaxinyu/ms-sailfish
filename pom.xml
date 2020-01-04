@@ -18,7 +18,7 @@
 		<module>ms-reactive</module>
         <module>ms-websocket-netty</module>
 		<module>ms-admin</module>
-        <module>ms-service-governance</module>
+        <module>ms-nacos-sentinel</module>
     </modules>
 
 	<properties>
