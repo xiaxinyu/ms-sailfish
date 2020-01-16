@@ -19,6 +19,7 @@
         <module>ms-websocket-netty</module>
 		<module>ms-admin</module>
         <module>ms-nacos-sentinel</module>
+        <module>ms-state-machine</module>
     </modules>
 
 	<properties>

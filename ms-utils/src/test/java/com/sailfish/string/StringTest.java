@@ -11,6 +11,8 @@ public class StringTest {
         String t2 = t1.intern();
         String t3 = "123";
 
+        System.out.println(t1.getClass().getSimpleName());
+
         Assert.assertFalse(t1 == t2);
         Assert.assertFalse(t1 == t3);
         Assert.assertTrue(t2 == t3);
