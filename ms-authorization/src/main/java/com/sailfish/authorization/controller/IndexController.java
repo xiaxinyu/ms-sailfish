@@ -1,4 +1,4 @@
-package com.sailfish.authorization.controller.resource;
+package com.sailfish.authorization.controller;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
