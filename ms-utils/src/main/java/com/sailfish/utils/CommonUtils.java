@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
  * @date 2019.7.2
  */
 public class CommonUtils {
-    private static final Logger logger = LoggerFactory.getLogger(JSONUtils.class);
+    private static final Logger logger = LoggerFactory.getLogger(CommonUtils.class);
 
     private CommonUtils() {
     }

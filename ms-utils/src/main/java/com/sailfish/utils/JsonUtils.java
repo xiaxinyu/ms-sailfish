@@ -17,8 +17,8 @@ import org.slf4j.LoggerFactory;
  * @author XIAXINYU3
  * @date 2019.7.2
  */
-public class JSONUtils {
-    private static final Logger logger = LoggerFactory.getLogger(JSONUtils.class);
+public class JsonUtils {
+    private static final Logger logger = LoggerFactory.getLogger(JsonUtils.class);
     private static final String EMPTY_JSON = "{}";
     private static final ObjectMapper mapper = new ObjectMapper();
     private static final Integer SUCCESS_CODE = 20000;
@@ -29,7 +29,7 @@ public class JSONUtils {
         mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
     }
 
-    private JSONUtils() {
+    private JsonUtils() {
     }
 
     public static String format(Object pojo) {

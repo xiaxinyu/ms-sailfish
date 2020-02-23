@@ -1,7 +1,7 @@
 package com.sailfish.utils;
 
 import lombok.extern.slf4j.Slf4j;
-import org.openjdk.jol.info.ClassLayout;
+//import org.openjdk.jol.info.ClassLayout;
 
 /**
  * Java 对象布局工具类
@@ -13,8 +13,8 @@ import org.openjdk.jol.info.ClassLayout;
 public class ClassLayoutUtils {
 
     public static void print(Object object) {
-        log.info("HasCode Hex: {}", Integer.toHexString(object.hashCode()));
+        /*log.info("HasCode Hex: {}", Integer.toHexString(object.hashCode()));
         String layout = ClassLayout.parseInstance(object).toPrintable();
-        log.info(layout);
+        log.info(layout);*/
     }
 }

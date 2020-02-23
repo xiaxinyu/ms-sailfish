@@ -14,7 +14,7 @@ import java.util.Enumeration;
  * @author XIAXINYU3
  */
 public class UrlUtils {
-    private static final Logger logger = LoggerFactory.getLogger(JSONUtils.class);
+    private static final Logger logger = LoggerFactory.getLogger(UrlUtils.class);
     private static String ipAddress;
     private static final String LOCAL_HOST_IP = "127.0.0.1";
 
