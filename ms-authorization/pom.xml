@@ -11,7 +11,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <spring-boot-ouath2-version>2.0.14.RELEASE</spring-boot-ouath2-version>
+        <spring-boot-ouath2-version>2.0.18.RELEASE</spring-boot-ouath2-version>
         <mybatis-version>2.0.0</mybatis-version>
     </properties>
 
