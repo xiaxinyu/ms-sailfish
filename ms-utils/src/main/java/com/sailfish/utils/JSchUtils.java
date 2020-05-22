@@ -39,4 +39,30 @@ public class JSchUtils {
         keyPair.dispose();
         return keys;
     }
+
+    public static Map<String, String> load(String publicKeyPath, String comment) throws JSchException {
+        Map<String, String> keys = new HashMap<>(2);
+
+        KeyPair keyPair = KeyPair.load(new JSch(), publicKeyPath);
+
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        //私钥，向OutPutStream中写入
+        keyPair.writePrivateKey(outputStream);
+        String privateKeyString = outputStream.toString();
+        //公钥，向OutPutStream中写入
+        outputStream = new ByteArrayOutputStream();
+        keyPair.writePublicKey(outputStream, comment);
+        String publicKeyString = outputStream.toString();
+
+        // 得到公钥字符串
+        keys.put(PUBLIC_KEY, publicKeyString);
+        // 得到私钥字符串
+        keys.put(PRIVATE_KEY, privateKeyString);
+
+
+        System.out.println("keyComment:" + keyPair.getPublicKeyComment());
+
+        keyPair.dispose();
+        return keys;
+    }
 }
