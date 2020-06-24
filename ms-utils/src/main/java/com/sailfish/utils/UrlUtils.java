@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
+import java.io.UnsupportedEncodingException;
 import java.net.*;
 import java.util.Enumeration;
 
@@ -69,5 +70,10 @@ public class UrlUtils {
                 conn.disconnect();
             }
         }
+    }
+
+    public static String encodingUrl(String value) throws UnsupportedEncodingException {
+        String newValue = URLEncoder.encode(value, "utf-8");
+        return newValue;
     }
 }
