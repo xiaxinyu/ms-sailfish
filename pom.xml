@@ -11,8 +11,6 @@
 		<module>ms-register-center</module>
 		<module>ms-authorization</module>
 		<module>ms-gateway</module>
-		<module>ms-utils</module>
-		<module>ms-websocket</module>
 		<module>ms-statemachine</module>
 		<module>ms-manager</module>
 		<module>ms-reactive</module>
