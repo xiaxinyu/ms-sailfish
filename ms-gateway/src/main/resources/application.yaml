@@ -42,7 +42,7 @@ eureka:
       VERSION: v1
   client:
     serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: http://ms-register-center:8761/eureka/
     registryFetchIntervalSeconds: 10
     disable-delta: true
 
