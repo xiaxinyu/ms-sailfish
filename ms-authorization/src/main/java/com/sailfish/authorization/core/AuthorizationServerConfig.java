@@ -1,14 +1,23 @@
 package com.sailfish.authorization.core;
 
-import com.sailfish.authorization.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
+import org.springframework.security.oauth2.provider.ClientDetailsService;
+import org.springframework.security.oauth2.provider.approval.JdbcApprovalStore;
+import org.springframework.security.oauth2.provider.client.JdbcClientDetailsService;
+import org.springframework.security.oauth2.provider.code.JdbcAuthorizationCodeServices;
+import org.springframework.security.oauth2.provider.token.AuthorizationServerTokenServices;
+import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
+import org.springframework.security.oauth2.provider.token.TokenStore;
+
+import javax.sql.DataSource;
 
 /**
  * Authorization Server configuration
@@ -20,32 +29,43 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 @EnableAuthorizationServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    DataSource dataSource;
 
     @Autowired
-    private AuthenticationManager authenticationManager;
+    TokenStore tokenStore;
 
     @Autowired
-    private UserService userService;
+    AuthenticationManager authenticationManager;
 
-    /**
-     * 使用密码模式需要配置
-     */
-    @Override
-    public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
-        endpoints.authenticationManager(authenticationManager)
-                .userDetailsService(userService);
+    @Autowired
+    ClientDetailsService clientDetailsService;
+
+    @Bean
+    @Primary
+    public AuthorizationServerTokenServices jdbcTokenServices() {
+        DefaultTokenServices tokenServices = new DefaultTokenServices();
+        tokenServices.setClientDetailsService(clientDetailsService);
+        tokenServices.setSupportRefreshToken(true);
+
+        //配置token的存储方法
+        tokenServices.setTokenStore(tokenStore);
+        tokenServices.setAccessTokenValiditySeconds(300);
+        tokenServices.setRefreshTokenValiditySeconds(1500);
+        return tokenServices;
     }
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients.inMemory()
-                .withClient("admin")//配置client_id
-                .secret(passwordEncoder.encode("123456"))//配置client_secret
-                .accessTokenValiditySeconds(3600)//配置访问token的有效期
-                .refreshTokenValiditySeconds(864000)//配置刷新token的有效期
-                .redirectUris("http://www.baidu.com")//配置redirect_uri，用于授权成功后跳转
-                .scopes("all")//配置申请的权限范围
-                .authorizedGrantTypes("authorization_code","password");//配置grant_type，表示授权类型
+        clients.withClientDetails(new JdbcClientDetailsService(dataSource));
+    }
+
+    @Override
+    public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
+        endpoints.authenticationManager(authenticationManager);
+        endpoints.tokenServices(jdbcTokenServices());
+        // 数据库管理授权码
+        endpoints.authorizationCodeServices(new JdbcAuthorizationCodeServices(dataSource));
+        // 数据库管理授权信息
+        endpoints.approvalStore(new JdbcApprovalStore(dataSource));
     }
 }

@@ -1,0 +1,99 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+    <changeSet author="xiaxinyu3" id="changelog-1.1">
+        <sql>
+            CREATE TABLE `user` (
+            `id` int(11) NOT NULL AUTO_INCREMENT,
+            `username` varchar(100) DEFAULT NULL,
+            `password` varchar(100) DEFAULT NULL,
+            `email` varchar(100) DEFAULT NULL,
+            `active_code` varchar(100) DEFAULT NULL,
+            `active_status` int(11) DEFAULT '0',
+            `roles` varchar(100) DEFAULT NULL,
+            PRIMARY KEY (`id`)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+        </sql>
+        <sql>
+            CREATE TABLE `authorities` (
+            `username` varchar(50) NOT NULL,
+            `authority` varchar(50) NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+        </sql>
+        <sql>
+            create table oauth_client_details (
+                client_id VARCHAR(256) PRIMARY KEY,
+                resource_ids VARCHAR(256),
+                client_secret VARCHAR(256),
+                scope VARCHAR(256),
+                authorized_grant_types VARCHAR(256),
+                web_server_redirect_uri VARCHAR(256),
+                authorities VARCHAR(256),
+                access_token_validity INTEGER,
+                refresh_token_validity INTEGER,
+                additional_information VARCHAR(4096),
+                autoapprove VARCHAR(256)
+            );
+        </sql>
+        <sql>
+            create table oauth_client_token (
+                token_id VARCHAR(256),
+                token blob,
+                authentication_id VARCHAR(256) PRIMARY KEY,
+                user_name VARCHAR(256),
+                client_id VARCHAR(256)
+            );
+        </sql>
+        <sql>
+            create table oauth_access_token (
+                token_id VARCHAR(256),
+                token blob,
+                authentication_id VARCHAR(256) PRIMARY KEY,
+                user_name VARCHAR(256),
+                client_id VARCHAR(256),
+                authentication blob,
+                refresh_token VARCHAR(256)
+            );
+        </sql>
+        <sql>
+            create table oauth_refresh_token (
+                token_id VARCHAR(256),
+                token blob,
+                authentication blob
+            );
+        </sql>
+        <sql>
+            create table oauth_code (
+                code VARCHAR(256), authentication blob
+            );
+        </sql>
+        <sql>
+            create table oauth_approvals (
+                userId VARCHAR(256),
+                clientId VARCHAR(256),
+                scope VARCHAR(256),
+                status VARCHAR(10),
+                expiresAt TIMESTAMP,
+                lastModifiedAt TIMESTAMP
+            );
+        </sql>
+    </changeSet>
+    <changeSet author="xiaxinyu3" id="changelog-1.2">
+        <sql>
+            INSERT INTO `user` (`username`,`password`,`email`,`active_code`,`active_status`,`roles`)
+            VALUES ('summer','$2a$10$LfAHuQfPDUkdatk5kenlZuj2iGx5UEtnnKTpgG7lNBGYk1q./TEli',NULL,NULL,1,'ADMIN');
+        </sql>
+    </changeSet>
+    <changeSet author="xiaxinyu3" id="changelog-1.3">
+        <sql>
+            INSERT INTO `oauth_client_details` (`client_id`,`resource_ids`,`client_secret`,`scope`
+            ,`authorized_grant_types`,`web_server_redirect_uri`,`authorities`,`access_token_validity`
+            ,`refresh_token_validity`,`additional_information`,`autoapprove`) VALUES ('admin'
+            ,'default','$2a$10$LfAHuQfPDUkdatk5kenlZuj2iGx5UEtnnKTpgG7lNBGYk1q./TEli'
+            ,'all,user,admin','authorization_code,password','http://www.baidu.com'
+            ,'',3600,864000,'{}','default');
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>

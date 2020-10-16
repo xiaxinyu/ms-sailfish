@@ -1,11 +1,14 @@
-package com.sailfish.authorization.bean;
+package com.sailfish.authorization.model;
 
+import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.List;
 
 /**
  * User entity
@@ -14,16 +17,14 @@ import java.util.List;
  * @date 2019.7.3
  */
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@TableName("user")
 public class User implements UserDetails {
     private String username;
     private String password;
-    private List<GrantedAuthority> authorities;
-
-    public User(String username, String password,List<GrantedAuthority> authorities) {
-        this.username = username;
-        this.password = password;
-        this.authorities = authorities;
-    }
+    private Collection<GrantedAuthority> authorities;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

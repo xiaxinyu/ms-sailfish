@@ -10,5 +10,9 @@ public class TestPsssword {
 		
 		encodedPassword = passwordEncoder.encode("123456");
 		System.out.println(encodedPassword);
+
+
+		boolean f = passwordEncoder.matches("123456","$2a$10$LfAHuQfPDUkdatk5kenlZuj2iGx5UEtnnKTpgG7lNBGYk1q./TEli");
+		System.out.println(f);
 	}
 }
