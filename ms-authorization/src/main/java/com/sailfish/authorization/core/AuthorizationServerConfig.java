@@ -3,19 +3,17 @@ package com.sailfish.authorization.core;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
-import org.springframework.security.oauth2.provider.ClientDetailsService;
+import org.springframework.security.oauth2.provider.approval.ApprovalStore;
 import org.springframework.security.oauth2.provider.approval.JdbcApprovalStore;
 import org.springframework.security.oauth2.provider.client.JdbcClientDetailsService;
+import org.springframework.security.oauth2.provider.code.AuthorizationCodeServices;
 import org.springframework.security.oauth2.provider.code.JdbcAuthorizationCodeServices;
-import org.springframework.security.oauth2.provider.token.AuthorizationServerTokenServices;
-import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
+import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 
 import javax.sql.DataSource;
 
@@ -28,30 +26,23 @@ import javax.sql.DataSource;
 @Configuration
 @EnableAuthorizationServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
+
     @Autowired
     DataSource dataSource;
 
-    @Autowired
-    TokenStore tokenStore;
-
-    @Autowired
-    AuthenticationManager authenticationManager;
-
-    @Autowired
-    ClientDetailsService clientDetailsService;
+    @Bean
+    public TokenStore tokenStore() {
+        return new JdbcTokenStore(dataSource);
+    }
 
     @Bean
-    @Primary
-    public AuthorizationServerTokenServices jdbcTokenServices() {
-        DefaultTokenServices tokenServices = new DefaultTokenServices();
-        tokenServices.setClientDetailsService(clientDetailsService);
-        tokenServices.setSupportRefreshToken(true);
+    public ApprovalStore approvalStore() {
+        return new JdbcApprovalStore(dataSource);
+    }
 
-        //配置token的存储方法
-        tokenServices.setTokenStore(tokenStore);
-        tokenServices.setAccessTokenValiditySeconds(300);
-        tokenServices.setRefreshTokenValiditySeconds(1500);
-        return tokenServices;
+    @Bean
+    public AuthorizationCodeServices authorizationCodeServices() {
+        return new JdbcAuthorizationCodeServices(dataSource);
     }
 
     @Override
@@ -60,12 +51,10 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     }
 
     @Override
-    public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
-        endpoints.authenticationManager(authenticationManager);
-        endpoints.tokenServices(jdbcTokenServices());
-        // 数据库管理授权码
-        endpoints.authorizationCodeServices(new JdbcAuthorizationCodeServices(dataSource));
-        // 数据库管理授权信息
-        endpoints.approvalStore(new JdbcApprovalStore(dataSource));
+    public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+        endpoints
+                .approvalStore(approvalStore())
+                .authorizationCodeServices(authorizationCodeServices())
+                .tokenStore(tokenStore());
     }
 }
